@@ -38,6 +38,7 @@ public class ListTester {
     // For example, try this: 
     // list.append(5);
     logger.info("The list looks like:" + list);
+    list.append(5);
     assertEquals(1, list.length(), "Expected list length <1>, but was actually length <" + list.length() + ">");
     
   }

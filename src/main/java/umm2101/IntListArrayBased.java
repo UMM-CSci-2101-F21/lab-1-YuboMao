@@ -25,7 +25,7 @@ public class IntListArrayBased implements IntegerList {
     if (numItems >= MAX_LIST) {
     // todo: part of step 5:
     // fix the code so that the message provides correct details about the problem
-    throw new ListIndexOutOfBoundsException("ListIndexOutOfBoundsException on insert");
+    throw new ListIndexOutOfBoundsException("ListException on insert -- cannot insert <"+item+"> because the list is full");
 
     } else {
       for (int i=numItems; i>position; i--) { // Shift elements up
@@ -47,17 +47,31 @@ public class IntListArrayBased implements IntegerList {
     numItems++;
     return true;
   }
+
+  private int remove(int  position) throws ListIndexOutOfBoundsException {
+    int num = items[position];
+
+    for (int i = position; i < numItems-1; i++) {
+      items[i] = items[i + 1];
+    }
+    numItems -= 1;
+    
+    return num;
+  }
   
   @Override
   public int remove() 
     throws ListIndexOutOfBoundsException {
     // todo: part of step 4: this method doesn't work yet - you need to write this code
     // What needs to happen when you remove something from an array-based list?
-    
+    if (position < 0 || position >= numItems){
+      throw new ListIndexOutOfBoundsException("wrong position, please check the current position");
+    }
+    int num = this.remove(position);
     // Someone might ask to remove an item from a location that does not exist
     // todo: part of step 5: be sure that the message for this exception 
     // provides correct details about the problem
-    return 0;
+    return num;
   }
 
   @Override
